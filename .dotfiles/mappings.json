@@ -1,0 +1,7 @@
+{
+  "Brewfile": "~/Brewfile",
+  ".gitconfig": "~/.gitconfig",
+  ".tool-versions": "~/.tool-versions",
+  ".coc-settings.json": "~/.coc-settings.json",
+  "init.vim": ["~/.vimrc", "~/.config/nvim/init.vim"]
+}
