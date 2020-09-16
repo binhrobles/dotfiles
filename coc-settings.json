@@ -1,0 +1,10 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "markdown"],
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {}
+    }
+  }
+}
