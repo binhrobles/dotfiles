@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/binhrobles/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -48,13 +48,13 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/binhrobles/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/binhrobles/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '~/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/binhrobles/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/binhrobles/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '~/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 ## asdf helpers
-export ASDF_INSTALLS=/Users/binhrobles/.asdf/installs
+export ASDF_INSTALLS=~/.asdf/installs
 alias go-reshim='asdf reshim golang && \
                  export GOV=$(asdf current golang | sed  '\''s/ *(set by .*)//g'\'') && \
                  export GOROOT="$ASDF_INSTALLS/golang/$GOV/go" && \
@@ -69,4 +69,4 @@ export PATH=$PATH:/usr/local/opt/python/libexec/bin
 export PATH=$PATH:$(yarn global bin)
 
 # eb util
-export PATH="/Users/binhrobles/.ebcli-virtual-env/executables:$PATH"
+export PATH="~/.ebcli-virtual-env/executables:$PATH"
