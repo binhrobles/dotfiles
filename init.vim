@@ -35,6 +35,7 @@ let g:ale_linters = {'go': ['gometalinter', 'gofmt', 'gobuild']}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['gofmt', 'goimports'],
+\   'javascript': ['eslint'],
 \}
 let g:ale_fix_on_save = 1
 
