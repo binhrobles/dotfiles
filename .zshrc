@@ -20,6 +20,7 @@ plugins=(
   aws
 	git
 	vi-mode
+  deno
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -66,9 +67,19 @@ export PATH=$PATH:/usr/local/opt/python/libexec/bin
 
 # put yarn execs in path
 export PATH=$PATH:$(yarn global bin)
+export PATH="/Users/binh_robles/.deno/bin:$PATH"
+
+# for fastlane builds
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # eb util
 export PATH="~/.ebcli-virtual-env/executables:$PATH"
 
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# k8s
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+alias kc=kubectl
+export PATH=/Users/binh_robles/code/tools/istio-1.10.0/bin:$PATH
