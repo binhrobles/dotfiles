@@ -13,7 +13,6 @@ brew "kubernetes-cli", link: false
 brew "minikube"
 brew "neovim"
 brew "p7zip"
-brew "pyenv"
 brew "skaffold"
 brew "tmux"
 brew "yarn"
