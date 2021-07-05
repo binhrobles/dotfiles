@@ -16,11 +16,9 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  asdf
   aws
 	git
 	vi-mode
-  deno
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -32,8 +30,6 @@ alias gp="git pull"
 alias gd="git diff"
 alias ga="git add"
 alias gc="git commit"
-
-alias awslocal="aws --endpoint-url=http://localhost:4566"
 
 ## zsh-autosuggest bindkey
 bindkey '^f' autosuggest-execute
