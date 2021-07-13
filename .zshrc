@@ -74,8 +74,3 @@ export PATH="~/.ebcli-virtual-env/executables:$PATH"
 
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# k8s
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-alias kc=kubectl
-export PATH=/Users/binh_robles/code/tools/istio-1.10.0/bin:$PATH
