@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -16,10 +13,15 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
+  autojump
   aws
-	git
-	vi-mode
+  git
+  vi-mode
 )
+
+# autocompletions for homebrew
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -36,41 +38,19 @@ bindkey '^f' autosuggest-execute
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
-
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '~/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 ## asdf helpers
+## when in doubt...reshim!
 export ASDF_INSTALLS=~/.asdf/installs
-alias go-reshim='asdf reshim golang && \
-                 export GOV=$(asdf current golang | sed  '\''s/ *(set by .*)//g'\'') && \
-                 export GOROOT="$ASDF_INSTALLS/golang/$GOV/go" && \
-                 export GOBIN="$GOROOT/bin" && \
-                 export PATH=$GOBIN:$PATH'
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+. ~/.asdf/plugins/golang/set-env.zsh # set GOROOT
 
 # put current python version executables into path aka don't hate your past self when you see this
-export PATH=$PATH:~/.local/bin
-export PATH=$PATH:/usr/local/opt/python/libexec/bin
+# export PATH=$PATH:~/.local/bin
+# export PATH=$PATH:/usr/local/opt/python/libexec/bin
 
-# put yarn execs in path
-export PATH=$PATH:$(yarn global bin)
-export PATH="/Users/binh_robles/.deno/bin:$PATH"
-
-# for fastlane builds
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-# eb util
-export PATH="~/.ebcli-virtual-env/executables:$PATH"
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

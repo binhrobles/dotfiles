@@ -2,6 +2,7 @@
   "Brewfile": "~/Brewfile",
   ".gitconfig": "~/.gitconfig",
   ".tool-versions": "~/.tool-versions",
+  ".asdfrc": "~/.asdfrc",
   ".coc-settings.json": "~/.coc-settings.json",
   "init.vim": ["~/.config/nvim/init.vim"]
 }
