@@ -33,6 +33,8 @@ alias gd="git diff"
 alias ga="git add"
 alias gc="git commit"
 
+alias vim="nvim"
+
 ## zsh-autosuggest bindkey
 bindkey '^f' autosuggest-execute
 
@@ -43,14 +45,15 @@ bindkey '^f' autosuggest-execute
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 ## asdf helpers
-## when in doubt...reshim!
+### when in doubt...reshim!
 export ASDF_INSTALLS=~/.asdf/installs
+
+### Go
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 . ~/.asdf/plugins/golang/set-env.zsh # set GOROOT
 
-# put current python version executables into path aka don't hate your past self when you see this
-# export PATH=$PATH:~/.local/bin
-# export PATH=$PATH:/usr/local/opt/python/libexec/bin
-
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Created by `pipx` on 2024-03-07 22:35:38
+export PATH="$PATH:/Users/binhrobles/.local/bin"

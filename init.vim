@@ -45,17 +45,6 @@ let g:ale_fixers = {
 \   'typescript': ['eslint'],
 \}
 
-"""" ignore deno linter on typescript files by default!
-"""" use local .nvimrc to w/
-"""" ```
-"""" let g:ale_linters = {'typescript': ['deno']}
-"""" let g:ale_fixers = {'typescript': ['deno']}
-"""" ```
-"""" to re-enable
-
-let g:ale_linters_ignore = {
-\   'typescript': ['deno'],
-\}
 let g:ale_fix_on_save = 1
 
 " Airline configuration

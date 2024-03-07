@@ -4,5 +4,6 @@
   ".tool-versions": "~/.tool-versions",
   ".asdfrc": "~/.asdfrc",
   ".coc-settings.json": "~/.coc-settings.json",
-  "init.vim": ["~/.config/nvim/init.vim"]
+  "init.lua": "~/.hammerspoon/init.lua",
+  "init.vim": "~/.config/nvim/init.vim"
 }
