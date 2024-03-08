@@ -56,4 +56,4 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Created by `pipx` on 2024-03-07 22:35:38
-export PATH="$PATH:/Users/binhrobles/.local/bin"
+export PATH="$PATH:~/.local/bin"
