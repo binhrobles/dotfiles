@@ -5,5 +5,12 @@
   ".asdfrc": "~/.asdfrc",
   ".coc-settings.json": "~/.coc-settings.json",
   "init.lua": "~/.hammerspoon/init.lua",
-  "init.vim": "~/.config/nvim/init.vim"
+  "nvim/init.vim": "~/.config/nvim/init.vim",
+  "nvim/after/ftplugin/html.lua": "~/.config/nvim/after/ftplugin/html.lua",
+  "nvim/after/ftplugin/javascript.lua": "~/.config/nvim/after/ftplugin/javascript.lua",
+  "nvim/after/ftplugin/lua.lua": "~/.config/nvim/after/ftplugin/lua.lua",
+  "nvim/after/ftplugin/rust.lua": "~/.config/nvim/after/ftplugin/rust.lua",
+  "nvim/after/plugin/lspconfig.lua": "~/.config/nvim/after/plugin/lspconfig.lua",
+  "nvim/after/plugin/rustaceanvim.lua": "~/.config/nvim/after/plugin/rustaceanvim.lua",
+  "nvim/after/plugin/telescope.lua": "~/.config/nvim/after/plugin/telescope.lua"
 }

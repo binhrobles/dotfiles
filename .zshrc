@@ -23,7 +23,11 @@ plugins=(
 # autocompletions for homebrew
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
+### zsh
 source $ZSH/oh-my-zsh.sh
+
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
@@ -34,6 +38,9 @@ alias ga="git add"
 alias gc="git commit"
 
 alias vim="nvim"
+
+# source some api tokens
+source ~/.tokens.env
 
 ## zsh-autosuggest bindkey
 bindkey '^f' autosuggest-execute
@@ -48,12 +55,22 @@ bindkey '^f' autosuggest-execute
 ### when in doubt...reshim!
 export ASDF_INSTALLS=~/.asdf/installs
 
+### yarn binaries
+export PATH="$PATH:$(yarn global bin)"
+
 ### Go
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 . ~/.asdf/plugins/golang/set-env.zsh # set GOROOT
 
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Created by `pipx` on 2024-03-07 22:35:38
 export PATH="$PATH:~/.local/bin"
+
+# For cargo compiled binaries
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# For Racket
+export PATH="$PATH:/Applications/Racket/bin/"
+
+# For SQLite
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
