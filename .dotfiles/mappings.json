@@ -12,5 +12,6 @@
   "nvim/after/ftplugin/rust.lua": "~/.config/nvim/after/ftplugin/rust.lua",
   "nvim/after/plugin/lspconfig.lua": "~/.config/nvim/after/plugin/lspconfig.lua",
   "nvim/after/plugin/rustaceanvim.lua": "~/.config/nvim/after/plugin/rustaceanvim.lua",
-  "nvim/after/plugin/telescope.lua": "~/.config/nvim/after/plugin/telescope.lua"
+  "nvim/after/plugin/telescope.lua": "~/.config/nvim/after/plugin/telescope.lua",
+  "nvim/after/plugin/treesitter.lua": "~/.config/nvim/after/plugin/treesitter.lua"
 }

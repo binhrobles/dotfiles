@@ -1,4 +1,6 @@
 call plug#begin()
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " linting
 Plug 'mrcjkb/rustaceanvim'
 Plug 'neovim/nvim-lspconfig'
@@ -35,11 +37,18 @@ set softtabstop=2 " insert/delete 2 spaces when hitting a TAB/BACKSPACE
 set shiftround    " round indent to multiple of 'shiftwidth'
 set autoindent    " align the new line indent with the previous line
 
+" folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 " local vimrc
 "" tell nvim that it should look for local config files and run them
 set exrc
 set secure
 let mapleader = "\<Space>"
+
+" tell nvim to treat .hbs files like html
+au BufRead,BufNewFile *.hbs set filetype=html
 
 "" tell nerdtree to reload config in the local dir whenever changing tabs
 let NERDTreeChDirMode=3
@@ -66,6 +75,9 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " autorefresh on buffer deletion
 autocmd BufDelete * call airline#extensions#tabline#buflist#invalidate()
+
+" remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
