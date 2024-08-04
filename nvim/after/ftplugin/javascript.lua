@@ -1,13 +1,13 @@
 -- TODO: this doesn't attach to any js / ts files
-local lspconfig = require('lspconfig')
+-- local lspconfig = require('lspconfig')
 
-lspconfig.eslint.setup({
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-})
+-- lspconfig.eslint.setup({
+--   on_attach = function(client, bufnr)
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--       buffer = bufnr,
+--       command = "EslintFixAll",
+--     })
+--   end,
+-- })
 
-lspconfig.eslint.launch()
+-- lspconfig.eslint.launch()

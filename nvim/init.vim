@@ -1,13 +1,22 @@
 call plug#begin()
+" code tooling
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " linting
 Plug 'mrcjkb/rustaceanvim'
+Plug 'evanleck/vim-svelte'
 Plug 'neovim/nvim-lspconfig'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
 " autocomplete
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.3.0', 'do': 'make install_jsregexp'}
 
 " diagnostic buffers
 Plug 'nvim-tree/nvim-web-devicons'
@@ -40,6 +49,7 @@ set autoindent    " align the new line indent with the previous line
 " folding
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
 
 " local vimrc
 "" tell nvim that it should look for local config files and run them

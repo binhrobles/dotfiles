@@ -50,9 +50,15 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- TypeScript
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  -- filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-}
+-- JS/TS setup
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+local servers = { 'tsserver', 'eslint', 'svelte', 'cssls', 'jsonls' }
+for _, lsp in pairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+end
 
