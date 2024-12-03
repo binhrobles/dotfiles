@@ -10,8 +10,10 @@
   "nvim/after/ftplugin/javascript.lua": "~/.config/nvim/after/ftplugin/javascript.lua",
   "nvim/after/ftplugin/lua.lua": "~/.config/nvim/after/ftplugin/lua.lua",
   "nvim/after/ftplugin/rust.lua": "~/.config/nvim/after/ftplugin/rust.lua",
+  "nvim/after/plugin/cmp.lua": "~/.config/nvim/after/plugin/cmp.lua",
   "nvim/after/plugin/lspconfig.lua": "~/.config/nvim/after/plugin/lspconfig.lua",
   "nvim/after/plugin/rustaceanvim.lua": "~/.config/nvim/after/plugin/rustaceanvim.lua",
   "nvim/after/plugin/telescope.lua": "~/.config/nvim/after/plugin/telescope.lua",
-  "nvim/after/plugin/treesitter.lua": "~/.config/nvim/after/plugin/treesitter.lua"
+  "nvim/after/plugin/treesitter.lua": "~/.config/nvim/after/plugin/treesitter.lua",
+  "nvim/after/plugin/trouble.lua": "~/.config/nvim/after/plugin/trouble.lua"
 }

@@ -1,10 +1,15 @@
-vim.g.rustaceanvim = {
+-- vim.g.rustaceanvim = {
   -- LSP configuration
-  server = {
-    on_attach = function(client)
-      -- turn off lsp highlighting
-      client.server_capabilities.semanticTokensProvider = nil
-    end,
-  },
-}
+  -- server = {
+  --   on_attach = function(client)
+  --     -- turn off lsp highlighting
+  --     client.server_capabilities.semanticTokensProvider = nil
+  --     -- boot up more quickly on large projects
+  --     -- client.server_capabilities.workspace.didChangeWatchedFiles = {
+  --     --   dynamicRegistration = false,
+  --     --   relativePatternSupport = false,
+  --     -- }
+  --   end,
+  -- },
+-- }
 

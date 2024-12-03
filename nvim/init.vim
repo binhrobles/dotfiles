@@ -9,6 +9,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+Plug 'mechatroner/rainbow_csv'
 
 " autocomplete
 Plug 'hrsh7th/nvim-cmp'
@@ -20,22 +21,27 @@ Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.3.0', 'do': 'make install_jsregexp'}
 
 " diagnostic buffers
 Plug 'nvim-tree/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
 Plug 'vim-airline/vim-airline'
+Plug 'folke/trouble.nvim'
 
 " auto grep / navigation
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'preservim/nerdtree'
 
 " theming
 Plug 'morhetz/gruvbox'
 
+" git
+Plug 'sindrets/diffview.nvim'
+Plug 'airblade/vim-gitgutter'
+
 " other stuff
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+
 call plug#end()
 
 " tabs
@@ -45,6 +51,10 @@ set expandtab     " insert spaces when hitting TABs
 set softtabstop=2 " insert/delete 2 spaces when hitting a TAB/BACKSPACE
 set shiftround    " round indent to multiple of 'shiftwidth'
 set autoindent    " align the new line indent with the previous line
+
+" line numbers
+:set number relativenumber
+:set nu rnu
 
 " folding
 set foldmethod=expr
@@ -65,9 +75,6 @@ let NERDTreeChDirMode=3
 
 " undo highlighted words
 nnoremap <esc> :noh<return><esc>
-
-" Trouble diagnostics configuration
-nnoremap <leader>xx <cmd>TroubleToggle<cr>
 
 " Tab through autocomplete options
 inoremap <silent><expr><TAB>
@@ -109,3 +116,10 @@ endif
 " from https://iterm2colorschemes.com/
 autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
+
+""""""""""""""" radar-specific config """""""""""""""""""""
+
+" set acceptance tests to default to pipe separated files
+autocmd BufNewFile,BufRead ~/code/radar/data/geocoder/api/acceptance/**/*.csv   set filetype=csv_pipe
+autocmd BufNewFile,BufRead ~/code/radar/data-swp/geocoder/api/acceptance/**/*.csv   set filetype=csv_pipe
+

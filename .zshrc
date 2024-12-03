@@ -17,7 +17,8 @@ plugins=(
   autojump
   aws
   git
-  vi-mode
+  zsh-vi-mode
+  fzf-tab
 )
 
 # autocompletions for homebrew
@@ -29,8 +30,44 @@ source $ZSH/oh-my-zsh.sh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# User configuration
+### Radar-specific stuff
+source ~/.radar.zshrc
 
+# User configuration
+fzf-git-branch() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    git branch --color=always --all --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 50% --ansi --no-multi --preview-window right:65% \
+            --bind=tab:up,btab:down \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
+fzf-git-checkout() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    local branch
+
+    branch=$(fzf-git-branch)
+    if [[ "$branch" = "" ]]; then
+        echo "No branch selected."
+        return
+    fi
+
+    # If branch name starts with 'remotes/' then it is a remote branch. By
+    # using --track and a remote branch name, it is the same as:
+    # git checkout -b branchName --track origin/branchName
+    if [[ "$branch" = 'remotes/'* ]]; then
+        git checkout --track $branch
+    else
+        git checkout $branch;
+    fi
+}
+
+alias gb="fzf-git-branch"
+alias fco="fzf-git-checkout"
 alias gs="git status"
 alias gp="git pull"
 alias gd="git diff"
@@ -38,9 +75,6 @@ alias ga="git add"
 alias gc="git commit"
 
 alias vim="nvim"
-
-# source some api tokens
-source ~/.tokens.env
 
 ## zsh-autosuggest bindkey
 bindkey '^f' autosuggest-execute
@@ -68,9 +102,14 @@ export PATH="$PATH:~/.local/bin"
 # For cargo compiled binaries
 export PATH="$PATH:$HOME/.cargo/bin"
 
-# For Racket
-export PATH="$PATH:/Applications/Racket/bin/"
-
 # For SQLite
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+export PKG_CONFIG_PATH=/opt/homebrew/Cellar/openssl@3/3.3.1/lib/pkgconfig/
+
+# dev machine tweaks
+source ~/.keys.env
+ulimit -n 4096
+ssh-add ~/.ssh/shared.pem
+export VDEV="ec2-user@172.31.107.11"

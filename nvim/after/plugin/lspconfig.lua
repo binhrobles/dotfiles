@@ -1,7 +1,7 @@
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -19,11 +19,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'g?', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
+    vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
   end,
@@ -32,8 +32,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 local status, lspconfig = pcall(require, "lspconfig")
 if (not status) then return end
 
-lspconfig.pyright.setup {}
-lspconfig.markdown_oxide.setup {}
+-- lspconfig.pyright.setup {}
+-- lspconfig.markdown_oxide.setup {}
 
 local on_attach = function(client, bufnr)
   -- let treesitter handle all syntax highlighting
@@ -50,15 +50,17 @@ local on_attach = function(client, bufnr)
   end
 end
 
+vim.lsp.inlay_hint.enable(true)
+
 -- JS/TS setup
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'tsserver', 'eslint', 'svelte', 'cssls', 'jsonls' }
+local servers = { 'tsserver', 'eslint', 'cssls', 'jsonls' } --, 'rust_analyzer' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
+
     on_attach = on_attach,
-    capabilities = capabilities
+    -- capabilities = capabilities
   }
 end
-
