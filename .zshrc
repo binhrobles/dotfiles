@@ -74,7 +74,8 @@ alias gd="git diff"
 alias ga="git add"
 alias gc="git commit"
 
-alias vim="nvim"
+# start llama server for nvim code completion
+alias llama="llama-server -hf ggml-org/Qwen2.5-Coder-3B-Q8_0-GGUF --port 8012 -ngl 99 -fa -ub 1024 -b 1024 -dt 0.1 --ctx-size 0 --cache-reuse 256"
 
 ## zsh-autosuggest bindkey
 bindkey '^f' autosuggest-execute

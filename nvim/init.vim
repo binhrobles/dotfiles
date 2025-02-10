@@ -18,6 +18,7 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.3.0', 'do': 'make install_jsregexp'}
+Plug 'ggml-org/llama.vim'
 
 " diagnostic buffers
 Plug 'nvim-tree/nvim-web-devicons'
@@ -26,6 +27,7 @@ Plug 'folke/trouble.nvim'
 
 " auto grep / navigation
 Plug 'nvim-lua/plenary.nvim'
+Plug 'ruifm/gitlinker.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'preservim/nerdtree'
@@ -76,14 +78,14 @@ let NERDTreeChDirMode=3
 " undo highlighted words
 nnoremap <esc> :noh<return><esc>
 
-" Tab through autocomplete options
-inoremap <silent><expr><TAB>
-    \ pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr><S-TAB>
-    \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" Map Tab to switch to the next buffer
+nnoremap <Tab> :bn<CR>
 
-" Coq autocomplete
-let g:coq_settings = { 'auto_start': v:true }
+" Map Shift-Tab to switch to the previous buffer
+nnoremap <S-Tab> :bp<CR>
+
+" llama config
+let g:llama_config = { 'show_info' : 0 }
 
 " Airline configuration
 let g:airline#extensions#tabline#enabled = 1
@@ -115,7 +117,7 @@ endif
 " activate gruvbox dark colorscheme (alt: light)
 " from https://iterm2colorschemes.com/
 autocmd vimenter * ++nested colorscheme gruvbox
-set background=dark
+" set background=dark
 
 """"""""""""""" radar-specific config """""""""""""""""""""
 
