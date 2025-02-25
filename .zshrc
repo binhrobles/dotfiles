@@ -66,6 +66,13 @@ fzf-git-checkout() {
     fi
 }
 
+# monkey patch in zsh vim yank
+function zvm_vi_yank() {
+	zvm_yank
+	echo ${CUTBUFFER} | pbcopy
+	zvm_exit_visual_mode
+}
+
 alias gb="fzf-git-branch"
 alias fco="fzf-git-checkout"
 alias gs="git status"
@@ -114,3 +121,4 @@ source ~/.keys.env
 ulimit -n 4096
 ssh-add ~/.ssh/shared.pem
 export VDEV="ec2-user@172.31.107.11"
+export JASON="ec2-user@172.31.108.48"

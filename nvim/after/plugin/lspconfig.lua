@@ -36,6 +36,8 @@ if (not status) then return end
 -- lspconfig.markdown_oxide.setup {}
 
 local on_attach = function(client, bufnr)
+  vim.lsp.inlay_hint.enable(true)
+
   -- let treesitter handle all syntax highlighting
   -- turn off lsp highlighting
   client.server_capabilities.semanticTokensProvider = nil
@@ -50,17 +52,74 @@ local on_attach = function(client, bufnr)
   end
 end
 
-vim.lsp.inlay_hint.enable(true)
+local on_attach_without_inlay_hints = function(client, bufnr)
+  vim.lsp.inlay_hint.enable(false)
+
+  -- let treesitter handle all syntax highlighting
+  -- turn off lsp highlighting
+  client.server_capabilities.semanticTokensProvider = nil
+
+  -- format on save
+  if client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("Format", { clear = true }),
+      buffer = bufnr,
+      callback = function() vim.lsp.buf.format() end
+    })
+  end
+end
+
+
 
 -- JS/TS setup
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'tsserver', 'eslint', 'cssls', 'jsonls' } --, 'rust_analyzer' }
-for _, lsp in pairs(servers) do
-  lspconfig[lsp].setup {
+-- servers without inlay hints
+lspconfig['ts_ls'].setup {
+  on_attach = function(client, bufnr)
+    vim.lsp.inlay_hint.enable(false)
 
-    on_attach = on_attach,
-    -- capabilities = capabilities
+    -- let treesitter handle all syntax highlighting
+    -- turn off lsp highlighting
+    client.server_capabilities.semanticTokensProvider = nil
+
+    -- format on save
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = vim.api.nvim_create_augroup("Format", { clear = true }),
+        buffer = bufnr,
+        callback = function() vim.lsp.buf.format() end
+      })
+    end
+  end,
+  settings = {
+    typescript = {
+      inlayHints = {
+        interactiveInlayHints = false, -- Disable interactive inlay hints
+      }
+    },
+    javascript = {
+      inlayHints = {
+        interactiveInlayHints = false, -- Disable interactive inlay hints
+      }
+    }
   }
+  -- capabilities = capabilities
+}
+
+local servers = { 'eslint' }
+for _, lsp in pairs(servers) do
+  lspconfig[lsp].setup({
+    on_attach = on_attach_without_inlay_hints
+    -- capabilities = capabilities
+  })
+end
+
+local servers = { 'cssls', 'jsonls' }
+for _, lsp in pairs(servers) do
+  lspconfig[lsp].setup({
+    on_attach = on_attach
+    -- capabilities = capabilities
+  })
 end
