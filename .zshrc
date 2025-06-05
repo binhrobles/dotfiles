@@ -79,6 +79,7 @@ alias gp="git pull"
 alias gd="git diff"
 alias ga="git add"
 alias gc="git commit"
+alias takeover="tmux detach -a"
 
 # start llama server for nvim code completion
 alias llama="llama-server --fim-qwen-3b-default --port 8012 -ngl 99 -fa -ub 1024 -b 1024 -dt 0.1 --ctx-size 0 --cache-reuse 256"

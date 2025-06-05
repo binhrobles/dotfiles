@@ -34,6 +34,7 @@ Plug 'preservim/nerdtree'
 
 " theming
 Plug 'morhetz/gruvbox'
+Plug 'zaldih/themery.nvim'
 
 " git
 Plug 'sindrets/diffview.nvim'
