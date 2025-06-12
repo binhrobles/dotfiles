@@ -116,7 +116,8 @@ for _, lsp in pairs(servers) do
   })
 end
 
-local servers = { 'cssls', 'jsonls' }
+-- metals: requires coursier, java, metals lsp installed
+local servers = { 'cssls', 'jsonls', 'metals' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup({
     on_attach = on_attach

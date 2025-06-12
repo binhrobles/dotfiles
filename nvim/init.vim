@@ -3,8 +3,6 @@ call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " linting
-Plug 'mrcjkb/rustaceanvim'
-Plug 'evanleck/vim-svelte'
 Plug 'neovim/nvim-lspconfig'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
@@ -31,6 +29,10 @@ Plug 'ruifm/gitlinker.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'preservim/nerdtree'
+
+" language specific
+Plug 'mrcjkb/rustaceanvim', { 'for': 'rust' }
+Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 
 " theming
 Plug 'morhetz/gruvbox'

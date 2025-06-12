@@ -114,3 +114,6 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # For SQLite
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# scala
+export PATH="$PATH:/Users/binh.robles/Library/Application Support/Coursier/bin"
