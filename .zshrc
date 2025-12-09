@@ -117,3 +117,9 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # scala
 export PATH="$PATH:/Users/binh.robles/Library/Application Support/Coursier/bin"
+export PATH="$HOME/.local/bin:$PATH"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/binh.robles/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

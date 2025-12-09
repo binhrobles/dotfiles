@@ -1,6 +1,7 @@
 call plug#begin()
 " code tooling
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " linting
 Plug 'neovim/nvim-lspconfig'
@@ -36,6 +37,7 @@ Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 
 " theming
 Plug 'morhetz/gruvbox'
+Plug 'scottmckendry/cyberdream.nvim'
 Plug 'zaldih/themery.nvim'
 
 " git
@@ -58,8 +60,8 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 set autoindent    " align the new line indent with the previous line
 
 " line numbers
-:set number relativenumber
-:set nu rnu
+" :set number relativenumber
+:set nu nornu
 
 " folding
 set foldmethod=expr

@@ -60,6 +60,19 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "J", function()
   win:setFrame(f)
 end)
 
+-- Window centered vertically (for vert monitors)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.y = max.y + (max.h / 5)
+  f.h = max.h * 2 / 3
+  win:setFrame(f)
+end)
+
+
 -- Easy reload
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
   hs.reload()
