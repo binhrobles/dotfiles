@@ -30,7 +30,7 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 source $ZSH/oh-my-zsh.sh
 
 ### Radar-specific stuff
-source ~/.radar.zshrc
+# source ~/.radar.zshrc
 
 # User configuration
 fzf-git-branch() {
@@ -82,8 +82,7 @@ alias gc="git commit"
 alias takeover="tmux detach -a"
 
 # start llama server for nvim code completion
-alias llama="llama-server --fim-qwen-3b-default --port 8012 -ngl 99 -fa -ub 1024 -b 1024 -dt 0.1 --ctx-size 0 --cache-reuse 256"
-# alias llama="llama-server -hf ggml-org/Qwen2.5-Coder-3B-Q8_0-GGUF --port 8012 -ngl 99 -fa -ub 1024 -b 1024 -dt 0.1 --ctx-size 0 --cache-reuse 256"
+alias llama="llama-server -hf ggml-org/Qwen2.5-Coder-1.5B-Q8_0-GGUF --port 8012 -ngl 99 -fa -ub 1024 -b 1024 -dt 0.1 --ctx-size 0 --cache-reuse 256"
 
 ## zsh-autosuggest bindkey
 bindkey '^f' autosuggest-execute
@@ -114,12 +113,3 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # For SQLite
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-
-# scala
-export PATH="$PATH:/Users/binh.robles/Library/Application Support/Coursier/bin"
-export PATH="$HOME/.local/bin:$PATH"
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/binh.robles/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
