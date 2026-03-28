@@ -1,12 +1,4 @@
-local treesitter = require("nvim-treesitter.configs")
-
-treesitter.setup({
-  highlight = {
-    enable = false,
-  },
-
-  indent = { enable = true },
-
+require("nvim-treesitter").setup({
   ensure_installed = {
     "json",
     "javascript",

@@ -16,7 +16,6 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.3.0', 'do': 'make install_jsregexp'}
-Plug 'ggml-org/llama.vim'
 
 " diagnostic buffers
 Plug 'nvim-tree/nvim-web-devicons'
@@ -27,11 +26,12 @@ Plug 'folke/trouble.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ruifm/gitlinker.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/nerdtree'
 
 " language specific
 Plug 'mrcjkb/rustaceanvim', { 'for': 'rust' }
+Plug 'pmizio/typescript-tools.nvim'
 Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 
 " theming
@@ -41,12 +41,17 @@ Plug 'zaldih/themery.nvim'
 
 " git
 Plug 'sindrets/diffview.nvim'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
+
+" markdown
+Plug 'MeanderingProgrammer/render-markdown.nvim'
 
 " other stuff
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'windwp/nvim-autopairs'
+Plug 'folke/which-key.nvim'
 
 call plug#end()
 
@@ -64,7 +69,7 @@ set autoindent    " align the new line indent with the previous line
 
 " folding
 set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+set foldexpr=v:lua.vim.treesitter.foldexpr()
 set nofoldenable
 
 " local vimrc
@@ -88,8 +93,6 @@ nnoremap <Tab> :bn<CR>
 " Map Shift-Tab to switch to the previous buffer
 nnoremap <S-Tab> :bp<CR>
 
-" llama config
-let g:llama_config = { 'show_info' : 0 }
 
 " Airline configuration
 let g:airline#extensions#tabline#enabled = 1
