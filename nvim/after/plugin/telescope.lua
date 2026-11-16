@@ -1,4 +1,19 @@
 local builtin = require('telescope.builtin')
+require('telescope').setup({
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--hidden',
+      '--glob=!.git/',
+    },
+  },
+})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })

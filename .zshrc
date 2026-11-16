@@ -30,7 +30,8 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 source $ZSH/oh-my-zsh.sh
 
 ### Radar-specific stuff
-# source ~/.radar.zshrc
+source ~/.radar.zshrc
+export EDITOR=/opt/homebrew/bin/nvim
 
 # User configuration
 fzf-git-branch() {
@@ -79,6 +80,7 @@ alias gp="git pull"
 alias gd="git diff"
 alias ga="git add"
 alias gc="git commit"
+alias s="stacky"
 alias takeover="tmux detach -a"
 
 # start llama server for nvim code completion
@@ -113,3 +115,33 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # For SQLite
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+
+load-nvmrc() {
+  local nvmrc_path
+  nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+   local nvmrc_node_version
+   nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+   if [ "$nvmrc_node_version" = "N/A" ]; then
+    nvm install
+   elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+    nvm use
+   fi
+   elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+   fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
