@@ -15,5 +15,5 @@ zsh (oh-my-zsh), tmux, git, Neovim, Hammerspoon, and a Brewfile for macOS.
 ## Language toolchains
 Each language uses its own recommended manager:
 - Node: [nvm](https://github.com/nvm-sh/nvm); `.nvmrc` files switch versions on `cd`
-- Rust: [rustup](https://rustup.rs)
+- Rust: [rustup](https://rustup.rs); nvim runs rust-analyzer from the 1.94 toolchain (`rustup toolchain install 1.94 --component rust-analyzer`)
 - Python: [uv](https://docs.astral.sh/uv/) (`uv python install <version> --default`)
