@@ -13,7 +13,6 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  asdf
   autojump
   aws
   git
@@ -23,8 +22,10 @@ plugins=(
   zsh-syntax-highlighting
 )
 
+typeset -U path fpath
+
 # autocompletions for homebrew
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 
 ### zsh
 source $ZSH/oh-my-zsh.sh
@@ -80,7 +81,6 @@ alias gp="git pull"
 alias gd="git diff"
 alias ga="git add"
 alias gc="git commit"
-alias s="stacky"
 alias takeover="tmux detach -a"
 
 # start llama server for nvim code completion
@@ -89,37 +89,33 @@ alias llama="llama-server -hf ggml-org/Qwen2.5-Coder-1.5B-Q8_0-GGUF --port 8012 
 ## zsh-autosuggest bindkey
 bindkey '^f' autosuggest-execute
 
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
-## asdf helpers
-### when in doubt...reshim!
-export ASDF_INSTALLS=~/.asdf/installs
+# `yarn global bin`, hardcoded: the subshell costs ~250ms per shell
+path+=("$HOME/.yarn/bin")
 
-### yarn binaries
-export PATH="$PATH:$(yarn global bin)"
-
-### Go
-export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-. ~/.asdf/plugins/golang/set-env.zsh # set GOROOT
-
-# Created by `pipx` on 2024-03-07 22:35:38
-export PATH="$PATH:~/.local/bin"
-
-# For cargo compiled binaries
-export PATH="$PATH:$HOME/.cargo/bin"
+# pipx / uv tools and uv's default python
+path=("$HOME/.local/bin" $path)
 
 # For SQLite
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
+# --no-use skips nvm's ~500ms default resolution; put the default node on PATH directly
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  . "$NVM_DIR/nvm.sh" --no-use
+  nvm_default_bin="$NVM_DIR/versions/node/v${$(<"$NVM_DIR/alias/default")#v}/bin"
+  if [ -d "$nvm_default_bin" ]; then
+    path=("$nvm_default_bin" $path)
+  else
+    nvm use default --silent # alias is not a concrete version (e.g. lts/*)
+  fi
+  unset nvm_default_bin
+fi
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 # place this after nvm initialization!
 autoload -U add-zsh-hook

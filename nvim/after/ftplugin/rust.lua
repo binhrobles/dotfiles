@@ -13,7 +13,7 @@ vim.keymap.set(
 vim.keymap.set("n",
   "<leader>E",
   function() vim.cmd.RustLsp('explainError') end,
-  { silent = true }
+  { silent = true, buffer = bufnr }
 )
 
-vim.keymap.set("n", "<leader>J", function() vim.cmd.RustLsp('joinLines') end, { silent = true })
+vim.keymap.set("n", "<leader>J", function() vim.cmd.RustLsp('joinLines') end, { silent = true, buffer = bufnr })

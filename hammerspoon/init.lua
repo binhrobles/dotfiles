@@ -73,6 +73,9 @@ end))
 local WORK_MONITOR = "Studio Display"
 local HOME_MONITOR = "DELL U3219Q"
 
+-- Never moved or resized by layouts
+local LAYOUT_EXEMPT = { ["Activity Monitor"] = true, ["MeetingBar"] = true }
+
 -- screenFor(appName, external, laptop) -> screen the app's windows belong on
 local layouts = {
   work = {
@@ -115,7 +118,7 @@ local function applyLayout(mode)
   layoutMode = mode
   for _, win in ipairs(hs.window.visibleWindows()) do
     local app = win:application()
-    if app then
+    if app and not LAYOUT_EXEMPT[app:name()] then
       win:moveToScreen(layout.screenFor(app:name(), external, laptop))
       win:setFrame(win:screen():frame())
     end
@@ -128,7 +131,8 @@ end
 local function applyLaptopLayout()
   layoutMode = nil
   for _, win in ipairs(hs.window.visibleWindows()) do
-    if win:application() then
+    local app = win:application()
+    if app and not LAYOUT_EXEMPT[app:name()] then
       win:setFrame(win:screen():frame())
     end
   end
@@ -170,7 +174,7 @@ layoutMode = detectLayoutMode()
 -- Route newly opened windows to their layout's screen (default filter: standard windows only)
 newWindowFilter = hs.window.filter.new()
 newWindowFilter:subscribe(hs.window.filter.windowCreated, function(win, appName)
-  if not layoutMode then return end
+  if not layoutMode or LAYOUT_EXEMPT[appName] then return end
   local layout = layouts[layoutMode]
   local external, laptop = layoutScreens(layout)
   if not laptop then return end
@@ -191,7 +195,16 @@ local appHotkeys = {
 
 for _, entry in ipairs(appHotkeys) do
   bind("apps", entry.key, entry.desc or entry.app, function()
-    hs.application.launchOrFocus(entry.app)
+    if hs.application.get(entry.app) then
+      hs.application.launchOrFocus(entry.app)
+      return
+    end
+    -- Launching with Option held starts Zen (Firefox) in Troubleshoot Mode
+    hs.timer.waitUntil(function()
+      return not hs.eventtap.checkKeyboardModifiers().alt
+    end, function()
+      hs.application.launchOrFocus(entry.app)
+    end, 0.05)
   end)
 end
 
